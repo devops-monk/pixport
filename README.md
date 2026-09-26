@@ -50,7 +50,7 @@ Pushing to `main` runs `.github/workflows/deploy.yml`, which tests, builds with 
 
 One-time setup: in the repository go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
 
-The site is then served at `https://<user>.github.io/<repo>/`.
+The site is served at **https://pixport.devops-monk.com/** (custom domain from `public/CNAME`; the DNS record is a CNAME to `devops-monk.github.io`). In **Settings → Pages**, set the custom domain to `pixport.devops-monk.com` and tick **Enforce HTTPS** once the certificate is issued.
 
 ## Disclaimer
 

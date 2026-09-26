@@ -27,8 +27,9 @@ jobs:
       - run: npm test
       - run: npm run build
         env:
-          # Pages serves the site from /<repository-name>/
-          VITE_BASE: /${{ github.event.repository.name }}/
+          # Served from the root of the custom domain in public/CNAME.
+          # Without a custom domain, use /${{ github.event.repository.name }}/ instead.
+          VITE_BASE: /
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
