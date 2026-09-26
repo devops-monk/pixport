@@ -1,0 +1,176 @@
+@import 'tailwindcss';
+
+/* Apple-style neutrals with a single blue accent. Values flip for dark mode below. */
+:root {
+  --canvas: #f5f5f7;
+  --surface: #ffffff;
+  --surface-2: #f2f2f4;
+  --surface-3: #e8e8ed;
+  --stage: #e8e8ed;
+  --ink: #1d1d1f;
+  --ink-2: #6e6e73;
+  --ink-3: #86868b;
+  --line: rgb(0 0 0 / 0.09);
+  --accent: #0071e3;
+  --accent-ink: #ffffff;
+  --accent-soft: rgb(0 113 227 / 0.1);
+  --good: #248a3d;
+  --warn: #b25000;
+  --bad: #d70015;
+  --glass: rgb(255 255 255 / 0.72);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 28px rgb(0 0 0 / 0.08);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #000000;
+    --surface: #1c1c1e;
+    --surface-2: #2c2c2e;
+    --surface-3: #3a3a3c;
+    --stage: #0d0d0e;
+    --ink: #f5f5f7;
+    --ink-2: #a1a1a6;
+    --ink-3: #8e8e93;
+    --line: rgb(255 255 255 / 0.12);
+    --accent: #2997ff;
+    --accent-ink: #ffffff;
+    --accent-soft: rgb(41 151 255 / 0.16);
+    --good: #30d158;
+    --warn: #ffb340;
+    --bad: #ff6961;
+    --glass: rgb(28 28 30 / 0.72);
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 28px rgb(0 0 0 / 0.45);
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-stage: var(--stage);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --color-glass: var(--glass);
+  --shadow-soft: var(--shadow);
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Inter', 'Segoe UI Variable', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI Variable Display', 'Segoe UI', Roboto, sans-serif;
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+html {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--canvas);
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* Checkerboard behind transparent images, like Preview and Photos. */
+.checker {
+  background-color: #fff;
+  background-image:
+    linear-gradient(45deg, #e5e5ea 25%, transparent 25%),
+    linear-gradient(-45deg, #e5e5ea 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e5e5ea 75%),
+    linear-gradient(-45deg, transparent 75%, #e5e5ea 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+/* Range input styled like a macOS/iOS slider. */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 22px;
+  background: transparent;
+  cursor: pointer;
+  --fill: 50%;
+}
+.slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--accent) var(--fill), var(--surface-3) var(--fill));
+}
+.slider::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--accent) var(--fill), var(--surface-3) var(--fill));
+}
+.slider.centered::-webkit-slider-runnable-track {
+  background: var(--surface-3);
+}
+.slider.centered::-moz-range-track {
+  background: var(--surface-3);
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -8px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.12), 0 2px 6px rgb(0 0 0 / 0.2);
+  transition: transform 0.15s var(--ease-spring);
+}
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.12), 0 2px 6px rgb(0 0 0 / 0.2);
+}
+.slider:active::-webkit-slider-thumb {
+  transform: scale(1.12);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* react-easy-crop: keep the dimmed surround subtle and the frame crisp. */
+.reactEasyCrop_CropArea {
+  color: rgb(0 0 0 / 0.45) !important;
+  border: 1px solid rgb(255 255 255 / 0.9) !important;
+}
